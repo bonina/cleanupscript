@@ -2,7 +2,7 @@
 echo ==========================
 echo  Cleanup script v1.71
 echo  for Windows(R) 7/8/10/11
-::    @https://github.com/bonina/cleanuptool
+::    @https://github.com/bonina/cleanupscript
 echo ==========================
 echo.
 
