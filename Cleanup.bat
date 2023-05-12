@@ -40,8 +40,8 @@ goto :error
 timeout /t 1 >nul 2>&1
 cscript //nologo %temp%\focus.js >nul 2>&1
 tasklist | findstr "cleanmgr.exe" >nul 2>&1 && goto :repeat
-
 echo Cleanup OK
+
 :: Delete previously created temporary appactivate script file
 if exist %temp%\focus.js del %temp%\focus.js >nul 2>&1 || (echo Cleanup ERROR - clear temp ERROR & goto :error)
 
