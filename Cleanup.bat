@@ -30,18 +30,18 @@ goto :error
 )
 
 :repeat
-timeout /t 1 >nul
-cscript //nologo %temp%\focus.js >nul
-tasklist | findstr "cleanmgr.exe" >nul && goto :repeat
+timeout /t 1 >nul 2>&1
+cscript //nologo %temp%\focus.js >nul 2>&1
+tasklist | findstr "cleanmgr.exe" >nul 2>&1 && goto :repeat
 
 echo Cleanup OK
-del %temp%\focus.js
+del %temp%\focus.js >nul 2>&1 || (echo Cleanup ERROR - del temp ERROR & goto :error)
 
 ver | find " 6." >nul 2>&1
 if %errorlevel% equ 0 goto old
 
 echo. & echo WinSxS folder cleanup in progress...
-Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase >nul && (echo WinSxS folder cleanup OK) || (echo WinSxS folder cleanup ERROR & goto :error)
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase >nul 2>&1 && (echo WinSxS folder cleanup OK) || (echo WinSxS folder cleanup ERROR & goto :error)
 
 :old
 echo. & echo Windows update cache cleanup in progress...
