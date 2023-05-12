@@ -59,9 +59,9 @@ echo. & echo Windows update cache cleanup in progress...
 sc query wuauserv | find "STATE" | find "RUNNING" >nul 2>&1
 if %errorlevel% equ 0 (
 net stop wuauserv >nul 2>&1 || (echo Windows update cache cleanup - service stop ERROR & goto :error)
-if exist %systemroot%\SoftwareDistribution\Download rd /s /q %systemroot%\SoftwareDistribution\Download && (net start wuauserv >nul 2>&1 & echo Windows update cache cleanup OK & goto :success) || (echo Windows update cache cleanup ERROR & goto :error)
+if exist %systemroot%\SoftwareDistribution\Download rd /s /q %systemroot%\SoftwareDistribution\Download >nul 2>&1 && (net start wuauserv >nul 2>&1 & echo Windows update cache cleanup OK & goto :success) || (echo Windows update cache cleanup ERROR & goto :error)
 ) else (
-if exist %systemroot%\SoftwareDistribution\Download rd /s /q %systemroot%\SoftwareDistribution\Download && (echo Windows update cache cleanup OK & goto :success) || (echo Windows update cache cleanup ERROR & goto :error)
+if exist %systemroot%\SoftwareDistribution\Download rd /s /q %systemroot%\SoftwareDistribution\Download >nul 2>&1 && (echo Windows update cache cleanup OK & goto :success) || (echo Windows update cache cleanup ERROR & goto :error)
 )
 
 :success
